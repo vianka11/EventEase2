@@ -1,0 +1,46 @@
+﻿@model IEnumerable<EventEasep2.Models.Venue>
+
+@{
+    ViewData["Title"] = "Venues";
+}
+
+<h1>Venues</h1>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Venue Name</th>
+            <th>Location</th>
+            <th>Capacity</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var venue in Model)
+        {
+            <tr>
+                <td>@venue.VenueName</td>
+                <td>@venue.Location</td>
+                <td>@venue.Capacity</td>
+                <td>
+                    <img src="@venue.ImageUrl" alt="Venue Image" width="100" />
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@venue.VenueId" class="btn btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@venue.VenueId" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@venue.VenueId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-success">Create New Venue</a>
